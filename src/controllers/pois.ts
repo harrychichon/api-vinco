@@ -51,7 +51,7 @@ export const getPoiById = asyncHandler(
 			const poi = await PoiModel.findById(id);
 
 			if (!poi) {
-				return next(createNotFoundError('point of interest'));
+				return next(createNotFoundError('POI'));
 			}
 
 			const response: ApiResponse<IPoi> = {
@@ -62,7 +62,7 @@ export const getPoiById = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('point of interest'));
+				return next(createInvalidIdError('POI'));
 			}
 			next(createFetchError('FETCH_ONE', 'point of interest'));
 		}
@@ -110,7 +110,7 @@ export const updatePoi = asyncHandler(
 			});
 
 			if (!poi) {
-				return next(createNotFoundError('point of interest'));
+				return next(createNotFoundError('POI'));
 			}
 
 			const response: ApiResponse<IPoi> = {
@@ -128,7 +128,7 @@ export const updatePoi = asyncHandler(
 				return next(createValidationError(messages));
 			}
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('point of interest'));
+				return next(createInvalidIdError('POI'));
 			}
 			next(createFetchError('UPDATE', 'point of interest'));
 		}
@@ -144,7 +144,7 @@ export const deletePoi = asyncHandler(
 			const poi = await PoiModel.findByIdAndDelete(id);
 
 			if (!poi) {
-				return next(createNotFoundError('point of interest'));
+				return next(createNotFoundError('POI'));
 			}
 
 			const response: ApiResponse<null> = {
@@ -155,7 +155,7 @@ export const deletePoi = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('point of interest'));
+				return next(createInvalidIdError('POI'));
 			}
 			next(createFetchError('DELETE', 'point of interest'));
 		}

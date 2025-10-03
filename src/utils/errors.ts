@@ -1,19 +1,28 @@
 import { createAppError } from '../middleware/errorHandler.js';
 import { ERROR_MESSAGES } from '../types/errors.js';
 
-/** */
 /**
  * Creates a "not found" error for a specific entity
  */
-export const createNotFoundError = (entity: string) => {
-	return createAppError(ERROR_MESSAGES.NOT_FOUND(entity), 404);
+export const createNotFoundError = (
+	entity: keyof typeof ERROR_MESSAGES.ENTITIES
+) => {
+	return createAppError(
+		ERROR_MESSAGES.NOT_FOUND(ERROR_MESSAGES.ENTITIES[entity].singular),
+		404
+	);
 };
 
 /**
  * Creates an invalid ID error for a specific entity
  */
-export const createInvalidIdError = (entity: string) => {
-	return createAppError(ERROR_MESSAGES.INVALID_ID(entity), 400);
+export const createInvalidIdError = (
+	entity: keyof typeof ERROR_MESSAGES.ENTITIES
+) => {
+	return createAppError(
+		ERROR_MESSAGES.INVALID_ID(ERROR_MESSAGES.ENTITIES[entity].singular),
+		400
+	);
 };
 
 /**

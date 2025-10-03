@@ -49,7 +49,7 @@ export const getSpeciesById = asyncHandler(
 			const species = await SpeciesModel.findById(id);
 
 			if (!species) {
-				return next(createNotFoundError('species'));
+				return next(createNotFoundError('SPECIES'));
 			}
 
 			const response: ApiResponse<ISpecies> = {
@@ -60,7 +60,7 @@ export const getSpeciesById = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('species'));
+				return next(createInvalidIdError('SPECIES'));
 			}
 			next(createFetchError('FETCH_ONE', 'species'));
 		}
@@ -108,7 +108,7 @@ export const updateSpecies = asyncHandler(
 			});
 
 			if (!species) {
-				return next(createNotFoundError('species'));
+				return next(createNotFoundError('SPECIES'));
 			}
 
 			const response: ApiResponse<ISpecies> = {
@@ -126,7 +126,7 @@ export const updateSpecies = asyncHandler(
 				return next(createValidationError(messages));
 			}
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('species'));
+				return next(createInvalidIdError('SPECIES'));
 			}
 			next(createFetchError('UPDATE', 'species'));
 		}
@@ -142,7 +142,7 @@ export const deleteSpecies = asyncHandler(
 			const species = await SpeciesModel.findByIdAndDelete(id);
 
 			if (!species) {
-				return next(createNotFoundError('species'));
+				return next(createNotFoundError('SPECIES'));
 			}
 
 			const response: ApiResponse<null> = {
@@ -153,7 +153,7 @@ export const deleteSpecies = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('species'));
+				return next(createInvalidIdError('SPECIES'));
 			}
 			next(createFetchError('DELETE', 'species'));
 		}

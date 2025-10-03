@@ -56,7 +56,7 @@ export const getCharacterById = asyncHandler(
 			const character = await CharacterModel.findById(id);
 
 			if (!character) {
-				return next(createNotFoundError('character'));
+				return next(createNotFoundError('CHARACTER'));
 			}
 
 			const response: ApiResponse<ICharacter> = {
@@ -67,7 +67,7 @@ export const getCharacterById = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('character'));
+				return next(createInvalidIdError('CHARACTER'));
 			}
 			next(createFetchError('FETCH_ONE', 'character'));
 		}
@@ -115,7 +115,7 @@ export const updateCharacter = asyncHandler(
 			});
 
 			if (!character) {
-				return next(createNotFoundError('character'));
+				return next(createNotFoundError('CHARACTER'));
 			}
 
 			const response: ApiResponse<ICharacter> = {
@@ -133,7 +133,7 @@ export const updateCharacter = asyncHandler(
 				return next(createValidationError(messages));
 			}
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('character'));
+				return next(createInvalidIdError('CHARACTER'));
 			}
 			next(createFetchError('UPDATE', 'character'));
 		}
@@ -149,7 +149,7 @@ export const deleteCharacter = asyncHandler(
 			const character = await CharacterModel.findByIdAndDelete(id);
 
 			if (!character) {
-				return next(createNotFoundError('character'));
+				return next(createNotFoundError('CHARACTER'));
 			}
 
 			const response: ApiResponse<null> = {
@@ -160,7 +160,7 @@ export const deleteCharacter = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('character'));
+				return next(createInvalidIdError('CHARACTER'));
 			}
 			next(createFetchError('DELETE', 'character'));
 		}
@@ -224,7 +224,7 @@ export const getCharacterBookStats = asyncHandler(
 				.select('name appears_in');
 
 			if (!character) {
-				return next(createNotFoundError('character'));
+				return next(createNotFoundError('CHARACTER'));
 			}
 
 			// Calculate stats from the populated books
@@ -250,7 +250,7 @@ export const getCharacterBookStats = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('character'));
+				return next(createInvalidIdError('CHARACTER'));
 			}
 			next(createFetchError('FETCH_ONE', 'character book statistics'));
 		}

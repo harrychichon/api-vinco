@@ -87,27 +87,3 @@ export const buildFilterQuery = (
 
 	return filter;
 };
-
-/**
- * Legacy function for backward compatibility
- * @deprecated Use the enhanced buildFilterQuery with FilterConfig instead
- */
-export const buildSimpleFilterQuery = (
-	req: Request,
-	allowedFilters: Record<string, string>
-) => {
-	const filter: any = {};
-
-	Object.entries(allowedFilters).forEach(([param, field]) => {
-		const value = req.query[param];
-		if (value && typeof value === 'string') {
-			// For string fields, use case-insensitive regex
-			filter[field] = { $regex: value, $options: 'i' };
-		} else if (value) {
-			// For non-string fields, direct equality
-			filter[field] = value;
-		}
-	});
-
-	return filter;
-};

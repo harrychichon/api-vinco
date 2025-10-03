@@ -57,7 +57,7 @@ export const getBookById = asyncHandler(
 			const book = await BookModel.findById(id);
 
 			if (!book) {
-				return next(createNotFoundError('book'));
+				return next(createNotFoundError('BOOK'));
 			}
 
 			const response: ApiResponse<IBook> = {
@@ -68,7 +68,7 @@ export const getBookById = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('book'));
+				return next(createInvalidIdError('BOOK'));
 			}
 			next(createFetchError('FETCH_ONE', 'book'));
 		}
@@ -85,7 +85,7 @@ export const getBookMetadata = asyncHandler(
 			);
 
 			if (!book) {
-				return next(createNotFoundError('book'));
+				return next(createNotFoundError('BOOK'));
 			}
 
 			const metadata: BookMetadata = {
@@ -104,7 +104,7 @@ export const getBookMetadata = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('book'));
+				return next(createInvalidIdError('BOOK'));
 			}
 			next(createFetchError('FETCH_METADATA', 'book'));
 		}
@@ -191,7 +191,7 @@ export const updateBook = asyncHandler(
 			});
 
 			if (!book) {
-				return next(createNotFoundError('book'));
+				return next(createNotFoundError('BOOK'));
 			}
 
 			const response: ApiResponse<IBook> = {
@@ -209,7 +209,7 @@ export const updateBook = asyncHandler(
 				return next(createValidationError(messages));
 			}
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('book'));
+				return next(createInvalidIdError('BOOK'));
 			}
 			next(createFetchError('UPDATE', 'book'));
 		}
@@ -225,7 +225,7 @@ export const deleteBook = asyncHandler(
 			const book = await BookModel.findByIdAndDelete(id);
 
 			if (!book) {
-				return next(createNotFoundError('book'));
+				return next(createNotFoundError('BOOK'));
 			}
 
 			const response: ApiResponse<null> = {
@@ -236,7 +236,7 @@ export const deleteBook = asyncHandler(
 			res.json(response);
 		} catch (error) {
 			if ((error as any).name === 'CastError') {
-				return next(createInvalidIdError('book'));
+				return next(createInvalidIdError('BOOK'));
 			}
 			next(createFetchError('DELETE', 'book'));
 		}
